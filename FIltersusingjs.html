@@ -6,7 +6,7 @@
       var img;
       var canimg;
 
-      function upload(){
+        function upload(){
         var filein=document.getElementById("fin");
         canimg=document.getElementById("c1");
         img=new SimpleImage(filein);
@@ -149,20 +149,30 @@ raimg.drawTo(canimg);
 
     </script>
 
+
     <style media="screen">
       body{
-        background-color:rgb(200,200,200);
+        background-image:url("horses.jpg");
         font-family:"Helvetica";
+        color:rgb(255,255,255);
       }
       canvas{
-        width:400px;
-        height:300px;
-        border:1px solid black;
+        width:500px;
+        height:400px;
+        border:3px solid rgb(200,200,100);
+      }
+      h1{
+        color:rgb(0,0,0);
+        text-align:center;
       }
       div{
         padding:2px;
         margin:2px;
-        border:3px solid blue;
+      }
+      #clear{
+        color:rgb(255,255,255);
+        font-size:30px;
+        text-decoration:underline;
       }
     </style>
 
@@ -172,13 +182,17 @@ raimg.drawTo(canimg);
   </head>
   <body>
     <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
-<u><h1>FILTER FUN</u></h1>
-<canvas id="c1"></canvas><p>
-<input type ="file" id="fin" multiple="false" accept="image/*" onchange="upload()">
-<p>
-<input type="button" value="greyscale" id="b1" onclick="toGrey()">
-<input type="button" value="red" id="b2" onclick="toRed()">
-<input type="button" value="rainbow" id="b3" onclick="toRainbow()"><p>
- TO CLEAR PLEASE REFRESH!!!
+    <u><h1>FILTER FUN</u></h1>
+    <p><p><p>
+    <div align="center">
+      <canvas id="c1"></canvas><p>
+        <input type ="file" id="fin" multiple="false" accept="image/*" onchange="upload()">
+        <p>
+          <u>SELECT THE IMAGE YOU WANT FILTERED.....</u><p>
+        <input type="button" value="greyscale" id="b1" onclick="toGrey()">
+        <input type="button" value="red" id="b2" onclick="toRed()">
+        <input type="button" value="rainbow" id="b3" onclick="toRainbow()"><p>
+        <div id="clear">  TO CLEAR PLEASE REFRESH!!!</div>
+      </div>
   </body>
 </html>
