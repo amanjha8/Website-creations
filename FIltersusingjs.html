@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <script type="text/javascript">
+      var img;
+      var canimg;
+
+      function upload(){
+        var filein=document.getElementById("fin");
+        canimg=document.getElementById("c1");
+        img=new SimpleImage(filein);
+        img.drawTo(canimg);
+        }
+
+        function toGrey(){
+          var gimg=img;
+          for(var pix of gimg.values()){
+            var avg=(pix.getRed()+pix.getGreen()+pix.getBlue())/3;
+            pix.setRed(avg);
+            pix.setGreen(avg);
+            pix.setBlue(avg);
+            }
+            gimg.drawTo(canimg);
+            }
+
+        function toRed(){
+var reimg=img;
+for(var pix of reimg.values()){
+  var avg=(pix.getRed()+pix.getGreen()+pix.getBlue())/3;
+  if(avg<=128)
+    {pix.setRed(2*avg);
+    pix.setBlue(0);
+    pix.setGreen(0);}
+  else
+    {pix.setRed(255);}
+}
+reimg.drawTo(canimg);
+}
+
+        function toRainbow(){
+var raimg=img;
+var h=raimg.getHeight();
+for(var pix of raimg.values()){
+  var y=pix.getY();
+   var avg=(pix.getRed()+pix.getGreen()+pix.getBlue())/3;
+  if(y<h/7)//red
+    {if(avg<128)
+    {pix.setRed(2*avg);
+     pix.setGreen(0);
+     pix.setBlue(0);}
+     else
+       {
+         pix.setRed(255);
+        pix.setGreen(2*avg-255);
+        pix.setBlue(2*avg-255)
+       }
+    }
+  else if(y>=h/7 && y<2*h/7){//orange
+    {if(avg<128)
+    {pix.setRed(2*avg);
+     pix.setGreen(0.8*avg);
+     pix.setBlue(0);}
+     else
+       {
+         pix.setRed(255);
+         pix.setGreen(1.2*avg-51);
+         pix.setBlue(2*avg-255);
+       }
+    }
+  }
+  else if(y>=2*h/7 && y<3*h/7){//yellow
+    {if(avg<128)
+    {pix.setRed(2*avg);
+     pix.setGreen(2*avg);
+     pix.setBlue(0);}
+     else
+       {
+         pix.setRed(255);
+        pix.setGreen(255);
+        pix.setBlue(2*avg-255)
+       }
+    }
+  }
+  else if(y>=3*h/7 && y<4*h/7){//green
+  {if(avg<128)
+    {pix.setRed(0);
+     pix.setGreen(2*avg);
+     pix.setBlue(0);}
+     else
+       {
+         pix.setRed(2*avg-255);
+         pix.setGreen(255);
+         pix.setBlue(2*avg-255)
+       }
+    }
+  }
+  else if(y>=4*h/7 && y<5*h/7){//blue
+    {if(avg<128)
+    {pix.setRed(0);
+     pix.setGreen(0);
+     pix.setBlue(2*avg);}
+     else
+       {
+     pix.setRed(2*avg-255);
+     pix.setGreen(2*avg-255);
+     pix.setBlue(2*avg);
+       }
+    }
+  }
+  else if(y>=5*h/7 && y<6*h/7){//indigo
+    {if(avg<128)
+    {pix.setRed(0.8*avg);
+     pix.setGreen(0);
+     pix.setBlue(2*avg);}
+     else
+       {
+     pix.setRed(1.2*avg-51);
+     pix.setGreen(2*avg-255);
+     pix.setBlue(255);
+       }
+    }
+  }
+  else {//violet
+  {if(avg<128)
+    {pix.setRed(1.6*avg);
+     pix.setGreen(0);
+     pix.setBlue(1.6*avg);}
+     else
+       {
+      pix.setRed(0.4*avg+153);
+     pix.setGreen(2*avg-255);
+     pix.setBlue(0.4*avg+153);
+       }
+    }
+}
+}
+raimg.drawTo(canimg);
+}
+
+        function clear(){
+          var img1=document.getElementById("c1");
+          doClear(img1);
+        }
+        function doClear(canvas){
+          var ctx=canvas.getContext("2d");
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+        }
+
+    </script>
+
+    <style media="screen">
+      body{
+        background-color:rgb(200,200,200);
+        font-family:"Helvetica";
+      }
+      canvas{
+        width:400px;
+        height:300px;
+        border:1px solid black;
+      }
+      div{
+        padding:2px;
+        margin:2px;
+        border:3px solid blue;
+      }
+    </style>
+
+
+    <meta charset="utf-8">
+    <title>Flter On</title>
+  </head>
+  <body>
+    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+<u><h1>FILTER FUN</u></h1>
+<canvas id="c1"></canvas><p>
+<input type ="file" id="fin" multiple="false" accept="image/*" onchange="upload()">
+<p>
+<input type="button" value="greyscale" id="b1" onclick="toGrey()">
+<input type="button" value="red" id="b2" onclick="toRed()">
+<input type="button" value="rainbow" id="b3" onclick="toRainbow()"><p>
+ TO CLEAR PLEASE REFRESH!!!
+  </body>
+</html>

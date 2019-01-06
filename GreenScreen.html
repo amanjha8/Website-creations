@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+
+
+    <script>
+      var fgImage;
+var bgImage;
+var can;
+var can1;
+
+function fore(){
+  can =document.getElementById("c1");
+  var imgf=document.getElementById("finf");
+  fgImage=new SimpleImage(imgf);
+  fgImage.drawTo(can);
+}
+
+function back(){
+  can1 =document.getElementById("c2");
+  var imb= document.getElementById("finb");
+  bgImage=new SimpleImage(imb);
+  bgImage.drawTo(can1);
+}
+
+function merge(){
+  for(var pix of fgImage.values()){
+    var x=pix.getX();
+    var y=pix.getY();
+   if(pix.getGreen()>=240){
+     var pixb=bgImage.getPixel(x,y);
+     fgImage.setPixel(x,y,pixb);
+   }
+    else
+      {
+        fgImage.setPixel(x,y,pix);
+      }
+  }
+
+  fgImage.drawTo(can);
+
+}
+function clearC(){
+  doClear(can);
+  doClear(can1);
+}
+function doClear(canvas){
+  var ctx =canvas.getContext("2d");
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+    </script>
+
+    <style media="screen">
+      body{
+        background-color:rgb(150,200,150);
+        }
+        canvas{
+          width:300px;
+          height:300px;
+          border:1px solid black;
+          }
+          div{
+            padding:2px;
+            margin:2px;
+            border:3px solid blue;
+          }
+    </style>
+
+    <title>The Green Screen Algorithm</title>
+  </head>
+  <body>
+<h1><b>Green Screen Web Page</b> </h1>
+<canvas id="c1"></canvas>
+<canvas id="c2"></canvas>
+<div>
+Foreground  :
+<input type="file" multiple="false" accept="image/*" id="finf" onchange="fore()">
+ <p>
+ Background :
+<input type="file" multiple="false" accept="image/*" id="finb" onchange="back()">
+  <p>
+ <input type="button" value="Create Composite" id="b1" onclick="merge()">
+ <input type="button" value="Clear Canvas" id="b2" onclick="clearC()">
+ </div>
+  </body>
+</html>
